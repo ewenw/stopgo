@@ -57,6 +57,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         W.addClass(this.historyDiv, 'history');
 
         this.historyButton = infoPanel.createToggleButton('History');
+        // disable history button initially
+        node.game.historyButton.disabled = true
         infoPanel.infoPanelDiv.appendChild(this.historyDiv);
 
         header.appendChild(this.historyButton);
@@ -138,6 +140,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // partner: function() { return this.partner; },
         init: function() {
             node.game.redChoice = null;
+            node.game.historyButton.disabled = false;
+            
         },
         roles: {
             RED: {
@@ -285,6 +289,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         partner: function() { return this.partner; },
         init: function() {
             node.game.blueChoice = null;
+            node.game.historyButton.disabled = false;
         },
         roles: {
             RED: {
@@ -419,6 +424,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('end', {
         donebutton: false,
+        // remove header and widgets when game ends
+        init: function(){
+            node.widgets.destroyAll();
+            W.destroyHeader();
+        },
         frame: 'end.htm',
         widget: {
             name: 'EndScreen',
