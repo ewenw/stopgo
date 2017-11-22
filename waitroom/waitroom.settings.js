@@ -199,7 +199,7 @@ module.exports = {
      *
      * @see WaitingRoom.dispatch
      */
-    PING_BEFORE_DISPATCH: false
+    PING_BEFORE_DISPATCH: false,
 
     /**
      * ## logicPath (string) Optional
@@ -216,5 +216,7 @@ module.exports = {
      * Disconnect a client if not selected for a game when dispatching
      */
     //DISCONNECT_IF_NOT_SELECTED: false,
+
+    PLAY_WITH_BOT_OPTION: true
 
 };

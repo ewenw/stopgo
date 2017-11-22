@@ -115,6 +115,21 @@ module.exports = {
 
     },
 
+
+    /**
+     * ## noAuthCookie (boolean) Optional
+     *
+     * If TRUE, a cookie with client ID is set even if authorization is off
+     *
+     * Set this option to TRUE, if the game uses views to render pages,
+     * and the context callbacks require access to treatment-specific settings.
+     *
+     * Forces disconnections of multiple browser tabs.
+     *
+     * Default: FALSE
+     */
+    noAuthCookie: true,
+
     /**
      * ## enableReconnections (boolean) Optional
      *

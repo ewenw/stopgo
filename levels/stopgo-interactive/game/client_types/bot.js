@@ -28,7 +28,7 @@ module.exports = function(treatmentName, settings, stager,
         console.log('Stage: ' , this.getCurrentGameStage());
         node.timer.randomDone();
     });
-
+    
     stager.setOnInit(function() {
         var payoffs;
         var payoffTableA, payoffTableB;
@@ -105,7 +105,9 @@ module.exports = function(treatmentName, settings, stager,
                         node.game.blueChoice = msg.data;
                         node.done();
                     });
-                }
+                },
+                // Blues times up first, and will send data.
+                timeup: null
             },
             BLUE: {
                 cb: function() {

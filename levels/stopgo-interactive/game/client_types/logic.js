@@ -41,7 +41,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         node.on.pdisconnect(function(player) {
             var role;
-
             player.allowReconnect = false; // check if registry maybe
 
             role = node.game.matcher.getRoleFor(player.id);
@@ -58,6 +57,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         chanceOfRight: 0.5
                     }
                 },
+                // BUG: error when RED disconnects
                 // TODO: if replaceId is set should options from old data.
                 replaceId: player.id,
                 gotoStep: node.player.stage,
@@ -65,6 +65,22 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     if (role === 'RED') {
                         node.game.tables[bot.player.id] =
                             node.game.tables[player.id];
+
+                        // Save the Red choice, if it was done already.
+                        if (node.game.choices[player.id]) {
+                            node.game.choices[bot.player.id] =
+                                node.game.choices[player.id];
+                        }
+                    }
+                    if (role === 'BLUE') {
+                        node.game.tables[bot.player.id] =
+                            node.game.tables[player.id];
+
+                        // Save the Red choice, if it was done already.
+                        if (node.game.choices[player.id]) {
+                            node.game.choices[bot.player.id] =
+                                node.game.choices[player.id];
+                        }
                     }
                 }
                 // gotoStepOptions: {
@@ -152,7 +168,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
                 if (role === 'BLUE') {
                     otherId = node.game.matcher.getMatchFor(id);
-
                     choices = node.game.choices;
                     blueChoice = msg.data.blueChoice;
                     choices[otherId].blueChoice = blueChoice;
@@ -340,8 +355,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     }
 
     function addData(playerId, data) {
-        var item = node.game.memory.player[playerId].last();
-        item.bonus = data;
+        if (node.game.memory.player[playerId]){
+            var item = node.game.memory.player[playerId].last();
+            item.bonus = data;
+        }
     }
 
     // returns payoffs as a object

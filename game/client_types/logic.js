@@ -36,8 +36,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             // (async so that it finishes all current step operations).
             setTimeout(function() {
                 // console.log('moving to stopgo interactive: ', msg.from);
-                channel.moveClientToGameLevel(msg.from, 'stopgo-interactive',
-                                              gameRoom.name);
+				gameRoom.clients.each(function(c) {
+					channel.moveClientToGameLevel(c.id, 'stopgo-interactive',
+                                                  gameRoom.name);	
+				});
+				
+                // gotoStepOptions: {
+                //     plot: { role: node.game.matcher.getRoleFor(player.id) }
+                // }
             }, 10);
 
             // Save client's data.

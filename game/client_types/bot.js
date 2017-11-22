@@ -25,7 +25,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         that.node.timer.randomDone();
     });
 
-    stager.extendStep('red-choice', {
+    stager.extendStep('red-choice-tutorial', {
         roles: {
             RED: {
                 cb: function() {
@@ -72,7 +72,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-    stager.extendStep('blue-choice', {
+    stager.extendStep('blue-choice-tutorial', {
         role: function() { return this.role; },
         partner: function() { return this.partner; },
         roles: {
@@ -110,6 +110,26 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     that.node.done(randomDoneValue);
                 }
             }
+        }
+    });
+    
+    stager.extendStep('tutorial-end', {
+        cb: function() {
+            var that;
+
+            that = this;
+            that.node.done('tutorial-over');
+            console.log('tutorial end');
+        }
+    });
+
+    stager.extendStep('results-tutorial', {
+        cb: function() {
+            var that;
+
+            that = this;
+            that.node.done('tutorial-over');
+            console.log('tutorial over');
         }
     });
 

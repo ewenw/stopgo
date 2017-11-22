@@ -274,9 +274,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
                     node.on.data('RED-CHOICE', function(msg) {
                         node.game.redChoice = msg.data;
-                        // setTimeout(function() {
+                        //setTimeout(function() {
                             node.done();
-                        // }, 5000);
+                        //1}, 5000);
                     });
                 }
             }

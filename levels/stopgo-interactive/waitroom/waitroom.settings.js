@@ -235,6 +235,13 @@ module.exports = {
         }
 
         // if (node.game.pl.size() <)
-    }
+    },
 
+
+    /**
+     * ## PLAY_WITH_BOT_OPTION (boolean) Optional
+     *
+     * Displays button to connect bots to the server and begin game
+     */
+    PLAY_WITH_BOT_OPTION: true
 };
